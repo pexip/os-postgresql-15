@@ -1,6 +1,7 @@
 postgresql-15 (15.5-0+deb12u1pexip1) pexip-bookworm; urgency=medium
 
   * Import for PexOS bookworm release.
+  * Force OPENSSL_NO_ENGINE for openssl 3 compatibility.
 
  -- Mark Hymers <mark.hymers@pexip.com>  Mon, 27 Nov 2023 13:12:12 +0000
 
