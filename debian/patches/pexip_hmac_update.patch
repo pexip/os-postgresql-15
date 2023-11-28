@@ -59,65 +59,63 @@ Index: os-postgresql-15/src/common/hmac_openssl.c
  	switch (ctx->type)
  	{
  		case PG_MD5:
-@@ -189,7 +201,65 @@ pg_hmac_init(pg_hmac_ctx *ctx, const uin
- 		return -1;
+@@ -190,6 +202,64 @@ pg_hmac_init(pg_hmac_ctx *ctx, const uin
  	}
  
--	return 0;
-+    return 0;
+ 	return 0;
 +
 +#else
 +	/* OpenSSL 3 version */
 +	OSSL_PARAM params[2];
 +
-+    ctx->evpmac = EVP_MAC_fetch(NULL, "HMAC", NULL);
++	ctx->evpmac = EVP_MAC_fetch(NULL, "HMAC", NULL);
 +
-+    if (ctx->evpmac == NULL)
-+        goto err;
++	if (ctx->evpmac == NULL)
++		goto err;
 +
 +	switch (ctx->type)
 +	{
 +		case PG_MD5:
 +			params[0] = OSSL_PARAM_construct_utf8_string("digest", "MD5", 0);
-+            params[1] = OSSL_PARAM_construct_end();
++			params[1] = OSSL_PARAM_construct_end();
 +			break;
 +		case PG_SHA1:
 +			params[0] = OSSL_PARAM_construct_utf8_string("digest", "SHA1", 0);
-+            params[1] = OSSL_PARAM_construct_end();
++			params[1] = OSSL_PARAM_construct_end();
 +			break;
 +		case PG_SHA224:
 +			params[0] = OSSL_PARAM_construct_utf8_string("digest", "SHA2-224", 0);
-+            params[1] = OSSL_PARAM_construct_end();
++			params[1] = OSSL_PARAM_construct_end();
 +			break;
 +		case PG_SHA256:
 +			params[0] = OSSL_PARAM_construct_utf8_string("digest", "SHA2-256", 0);
-+            params[1] = OSSL_PARAM_construct_end();
++			params[1] = OSSL_PARAM_construct_end();
 +			break;
 +		case PG_SHA384:
 +			params[0] = OSSL_PARAM_construct_utf8_string("digest", "SHA2-384", 0);
-+            params[1] = OSSL_PARAM_construct_end();
++			params[1] = OSSL_PARAM_construct_end();
 +			break;
 +		case PG_SHA512:
 +			params[0] = OSSL_PARAM_construct_utf8_string("digest", "SHA2-512", 0);
-+            params[1] = OSSL_PARAM_construct_end();
++			params[1] = OSSL_PARAM_construct_end();
 +			break;
 +	}
 +
-+    ctx->hmacctx = EVP_MAC_CTX_new(ctx->evpmac);
++	ctx->hmacctx = EVP_MAC_CTX_new(ctx->evpmac);
 +
-+    if (ctx->hmacctx == NULL)
-+        goto err;
++	if (ctx->hmacctx == NULL)
++		goto err;
 +
-+    status = EVP_MAC_init(ctx->hmacctx, key, len, params);
++	status = EVP_MAC_init(ctx->hmacctx, key, len, params);
 +
-+    if (status < 0)
-+        goto err;
++	if (status < 0)
++		goto err;
 +
-+    return 0;
++	return 0;
 +
 +err:
 +	/* OpenSSL internals return 1 on success, 0 on failure */
-+    ctx->errreason = SSLerrmessage(ERR_get_error());
++	ctx->errreason = SSLerrmessage(ERR_get_error());
 +	ctx->error = PG_HMAC_ERROR_OPENSSL;
 +
 +	return -1;
@@ -133,7 +131,7 @@ Index: os-postgresql-15/src/common/hmac_openssl.c
 +#if OPENSSL_VERSION_NUMBER < 0x30000000L
  	status = HMAC_Update(ctx->hmacctx, data, len);
 +#else
-+    status = EVP_MAC_update(ctx->hmacctx, data, len);
++	status = EVP_MAC_update(ctx->hmacctx, data, len);
 +#endif
  
  	/* OpenSSL internals return 1 on success, 0 on failure */
@@ -150,17 +148,17 @@ Index: os-postgresql-15/src/common/hmac_openssl.c
  
  	/* OpenSSL internals return 1 on success, 0 on failure */
  	if (status <= 0)
-@@ -300,16 +378,20 @@ pg_hmac_free(pg_hmac_ctx *ctx)
+@@ -300,12 +378,17 @@ pg_hmac_free(pg_hmac_ctx *ctx)
  	if (ctx == NULL)
  		return;
  
 -#ifdef HAVE_HMAC_CTX_FREE
 +#if defined(HAVE_HMAC_CTX_NEW) || OPENSSL_VERSION_NUMBER >= 0x30000000L
 +#if OPENSSL_VERSION_NUMBER >= 0x30000000L
- 	HMAC_CTX_free(ctx->hmacctx);
++	EVP_MAC_CTX_free(ctx->hmacctx);
++	EVP_MAC_free(ctx->evpmac);
 +#else
-+    EVP_MAC_CTX_free(ctx->hmacctx);
-+    EVP_MAC_free(ctx->evpmac);
+ 	HMAC_CTX_free(ctx->hmacctx);
 +#endif /* OPENSSL_VERSION_NUMBER */
  #ifndef FRONTEND
  	ResourceOwnerForgetHMAC(ctx->resowner, PointerGetDatum(ctx));
@@ -170,7 +168,3 @@ Index: os-postgresql-15/src/common/hmac_openssl.c
  	explicit_bzero(ctx->hmacctx, sizeof(HMAC_CTX));
  	FREE(ctx->hmacctx);
  #endif
--
- 	explicit_bzero(ctx, sizeof(pg_hmac_ctx));
- 	FREE(ctx);
- }
