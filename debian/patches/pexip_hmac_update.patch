@@ -142,7 +142,20 @@ Index: os-postgresql-15/src/common/hmac_openssl.c
  
  	/* OpenSSL internals return 1 on success, 0 on failure */
  	if (status <= 0)
-@@ -277,7 +363,11 @@ pg_hmac_final(pg_hmac_ctx *ctx, uint8 *d
+@@ -226,7 +312,12 @@ int
+ pg_hmac_final(pg_hmac_ctx *ctx, uint8 *dest, size_t len)
+ {
+ 	int			status = 0;
++
++#if OPENSSL_VERSION_NUMBER < 0x30000000L
+ 	uint32		outlen;
++#else
++	size_t		outlen;
++#endif
+ 
+ 	if (ctx == NULL)
+ 		return -1;
+@@ -277,7 +368,11 @@ pg_hmac_final(pg_hmac_ctx *ctx, uint8 *d
  			break;
  	}
  
@@ -154,7 +167,7 @@ Index: os-postgresql-15/src/common/hmac_openssl.c
  
  	/* OpenSSL internals return 1 on success, 0 on failure */
  	if (status <= 0)
-@@ -300,12 +390,17 @@ pg_hmac_free(pg_hmac_ctx *ctx)
+@@ -300,12 +395,17 @@ pg_hmac_free(pg_hmac_ctx *ctx)
  	if (ctx == NULL)
  		return;
  
