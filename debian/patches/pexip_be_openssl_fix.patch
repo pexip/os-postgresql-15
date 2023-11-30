@@ -100,14 +100,14 @@ Index: os-postgresql-15/src/backend/libpq/be-secure-openssl.c
  		return NULL;
  	}
  	if ((codes & DH_NOT_SUITABLE_GENERATOR) &&
-@@ -1018,10 +1047,33 @@ load_dh_file(char *filename, bool isServ
+@@ -1018,9 +1047,32 @@ load_dh_file(char *filename, bool isServ
  		ereport(isServerStart ? FATAL : LOG,
  				(errcode(ERRCODE_CONFIG_FILE_ERROR),
  				 errmsg("invalid DH parameters: neither suitable generator or safe prime")));
 -		DH_free(dh);
 +		pg_dh_free(dh);
-+		return NULL;
-+	}
+ 		return NULL;
+ 	}
 +#else
 +	/* No longer have the ability to discriminate, just a general warning */
 +	ctx = EVP_PKEY_CTX_new(dh, NULL);
@@ -125,16 +125,15 @@ Index: os-postgresql-15/src/backend/libpq/be-secure-openssl.c
 +				(errcode(ERRCODE_CONFIG_FILE_ERROR),
 +				 errmsg("invalid DH parameters")));
 +		pg_dh_free(dh);
- 		return NULL;
- 	}
- 
++		return NULL;
++	}
++
 +	EVP_PKEY_CTX_free(ctx);
 +
 +#endif
-+
+ 
  	return dh;
  }
- 
 @@ -1032,20 +1084,46 @@ load_dh_file(char *filename, bool isServ
   *	the	hardcoded DH parameters supplied with the backend to prevent
   *	problems.
@@ -194,7 +193,7 @@ Index: os-postgresql-15/src/backend/libpq/be-secure-openssl.c
  
  	SSL_CTX_set_options(context, SSL_OP_SINGLE_DH_USE);
  
-@@ -1182,17 +1260,17 @@ initialize_dh(SSL_CTX *context, bool isS
+@@ -1182,17 +1260,21 @@ initialize_dh(SSL_CTX *context, bool isS
  		return false;
  	}
  
@@ -211,11 +210,15 @@ Index: os-postgresql-15/src/backend/libpq/be-secure-openssl.c
  	}
  
 -	DH_free(dh);
++#if OPENSSL_VERSION_NUMBER < 0x30000000L
++	/* OpenSSL 3 and greater take ownership of the EVP_PKEY via the
++	 * SSL_CTX_set0_tmp_dh_pkey function so we must not free it */
 +	pg_dh_free(dh);
++#endif
  	return true;
  }
  
-@@ -1205,7 +1283,9 @@ static bool
+@@ -1205,7 +1287,9 @@ static bool
  initialize_ecdh(SSL_CTX *context, bool isServerStart)
  {
  #ifndef OPENSSL_NO_ECDH
@@ -225,7 +228,7 @@ Index: os-postgresql-15/src/backend/libpq/be-secure-openssl.c
  	int			nid;
  
  	nid = OBJ_sn2nid(SSLECDHCurve);
-@@ -1217,6 +1297,7 @@ initialize_ecdh(SSL_CTX *context, bool i
+@@ -1217,6 +1301,7 @@ initialize_ecdh(SSL_CTX *context, bool i
  		return false;
  	}
  
@@ -233,7 +236,7 @@ Index: os-postgresql-15/src/backend/libpq/be-secure-openssl.c
  	ecdh = EC_KEY_new_by_curve_name(nid);
  	if (!ecdh)
  	{
-@@ -1228,9 +1309,18 @@ initialize_ecdh(SSL_CTX *context, bool i
+@@ -1228,9 +1313,18 @@ initialize_ecdh(SSL_CTX *context, bool i
  
  	SSL_CTX_set_options(context, SSL_OP_SINGLE_ECDH_USE);
  	SSL_CTX_set_tmp_ecdh(context, ecdh);
