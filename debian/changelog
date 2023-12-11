@@ -1,3 +1,9 @@
+postgresql-15 (15.5-0+deb12u1pexip3) pexip-bookworm; urgency=medium
+
+  * Fix maintainer fields
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Mon, 11 Dec 2023 16:03:52 +0000
+
 postgresql-15 (15.5-0+deb12u1pexip2) pexip-bookworm; urgency=medium
 
   * Bookworm build for product distribution
