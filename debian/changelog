@@ -1,3 +1,22 @@
+postgresql-15 (15.6-0+deb12u1) bookworm-security; urgency=medium
+
+  * New upstream version.
+
+    * Tighten security restrictions within REFRESH MATERIALIZED VIEW
+      CONCURRENTLY (Heikki Linnakangas)
+
+      One step of a concurrent refresh command was run under weak security
+      restrictions.  If a materialized view's owner could persuade a superuser
+      or other high-privileged user to perform a concurrent refresh on that
+      view, the view's owner could control code executed with the privileges
+      of the user running REFRESH. Fix things so that all user-determined code
+      is run as the view's owner, as expected.
+
+      The PostgreSQL Project thanks Pedro Gallegos for reporting this problem.
+      (CVE-2024-0985)
+
+ -- Christoph Berg <myon@debian.org>  Tue, 06 Feb 2024 13:37:19 +0100
+
 postgresql-15 (15.5-0+deb12u1) bookworm-security; urgency=medium
 
   * New upstream version.
