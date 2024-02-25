@@ -1,3 +1,9 @@
+postgresql-15 (15.6-0+deb12u1+pexip24u1) pexip; urgency=medium
+
+  * New upstream release
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Sun, 25 Feb 2024 11:58:13 +0000
+
 postgresql-15 (15.6-0+deb12u1) bookworm-security; urgency=medium
 
   * New upstream version.
