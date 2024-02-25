@@ -189,7 +189,7 @@ extern int plpgsql_yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 120 "pl_gram.y"
+#line 121 "pl_gram.y"
 
 	core_YYSTYPE core_yystype;
 	/* these fields must match core_YYSTYPE: */
