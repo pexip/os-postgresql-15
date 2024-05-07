@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
 .\"      Date: 2024
-.\"    Manual: PostgreSQL 15.6 Documentation
-.\"    Source: PostgreSQL 15.6
+.\"    Manual: PostgreSQL 15.7 Documentation
+.\"    Source: PostgreSQL 15.7
 .\"  Language: English
 .\"
-.TH "ALTER DEFAULT PRIVILEGES" "7" "2024" "PostgreSQL 15.6" "PostgreSQL 15.6 Documentation"
+.TH "ALTER DEFAULT PRIVILEGES" "7" "2024" "PostgreSQL 15.7" "PostgreSQL 15.7 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -57,7 +57,8 @@ GRANT { USAGE | ALL [ PRIVILEGES ] }
     ON TYPES
     TO { [ GROUP ] \fIrole_name\fR | PUBLIC } [, \&.\&.\&.] [ WITH GRANT OPTION ]
 
-GRANT { USAGE | CREATE | ALL [ PRIVILEGES ] }
+GRANT { { USAGE | CREATE }
+    [, \&.\&.\&.] | ALL [ PRIVILEGES ] }
     ON SCHEMAS
     TO { [ GROUP ] \fIrole_name\fR | PUBLIC } [, \&.\&.\&.] [ WITH GRANT OPTION ]
 
@@ -88,7 +89,8 @@ REVOKE [ GRANT OPTION FOR ]
     [ CASCADE | RESTRICT ]
 
 REVOKE [ GRANT OPTION FOR ]
-    { USAGE | CREATE | ALL [ PRIVILEGES ] }
+    { { USAGE | CREATE }
+    [, \&.\&.\&.] | ALL [ PRIVILEGES ] }
     ON SCHEMAS
     FROM { [ GROUP ] \fIrole_name\fR | PUBLIC } [, \&.\&.\&.]
     [ CASCADE | RESTRICT ]
