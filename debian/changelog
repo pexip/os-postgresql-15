@@ -1,3 +1,9 @@
+postgresql-15 (15.6-0+deb12u1+pexip24u2) pexip; urgency=medium
+
+  * Rebuild without PL, GSSAPI & LDAP support
+
+ -- Huw Jones <huw@pexip.com>  Thu, 16 May 2024 16:33:16 +0100
+
 postgresql-15 (15.6-0+deb12u1+pexip24u1) pexip; urgency=medium
 
   * New upstream release

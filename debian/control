@@ -42,7 +42,7 @@ Build-Depends:
  mawk,
  perl (>= 5.8),
  pkg-config,
- postgresql-common (>= 233~),
+ postgresql-common (>= 248+pexip24u3~),
  python3-dev,
  systemtap-sdt-dev,
  tcl-dev,
@@ -249,48 +249,48 @@ Description: documentation for the PostgreSQL database management system
  .
  PostgreSQL is an object-relational SQL database management system.
 
-Package: postgresql-plperl-15
-Architecture: any
-Depends:
- perl,
- postgresql-15 (= ${binary:Version}),
- ${misc:Depends},
- ${shlibs:Depends},
-Provides:
- postgresql-plperl,
-Description: PL/Perl procedural language for PostgreSQL 15
- PL/Perl enables an SQL developer to write procedural language functions
- for PostgreSQL 15 in Perl.  You need this package if you have any
- PostgreSQL 15 functions that use the languages plperl or plperlu.
- .
- PostgreSQL is an object-relational SQL database management system.
+# Package: postgresql-plperl-15
+# Architecture: any
+# Depends:
+#  perl,
+#  postgresql-15 (= ${binary:Version}),
+#  ${misc:Depends},
+#  ${shlibs:Depends},
+# Provides:
+#  postgresql-plperl,
+# Description: PL/Perl procedural language for PostgreSQL 15
+#  PL/Perl enables an SQL developer to write procedural language functions
+#  for PostgreSQL 15 in Perl.  You need this package if you have any
+#  PostgreSQL 15 functions that use the languages plperl or plperlu.
+#  .
+#  PostgreSQL is an object-relational SQL database management system.
 
-Package: postgresql-plpython3-15
-Architecture: any
-Depends:
- postgresql-15 (= ${binary:Version}),
- ${misc:Depends},
- ${shlibs:Depends},
-Provides:
- postgresql-plpython3,
-Description: PL/Python 3 procedural language for PostgreSQL 15
- PL/Python 3 enables an SQL developer to write procedural language functions
- for PostgreSQL 15 in Python 3.  You need this package if you have any
- PostgreSQL 15 functions that use the languages plpython3 or plpython3u.
- .
- PostgreSQL is an object-relational SQL database management system.
+# Package: postgresql-plpython3-15
+# Architecture: any
+# Depends:
+#  postgresql-15 (= ${binary:Version}),
+#  ${misc:Depends},
+#  ${shlibs:Depends},
+# Provides:
+#  postgresql-plpython3,
+# Description: PL/Python 3 procedural language for PostgreSQL 15
+#  PL/Python 3 enables an SQL developer to write procedural language functions
+#  for PostgreSQL 15 in Python 3.  You need this package if you have any
+#  PostgreSQL 15 functions that use the languages plpython3 or plpython3u.
+#  .
+#  PostgreSQL is an object-relational SQL database management system.
 
-Package: postgresql-pltcl-15
-Architecture: any
-Depends:
- postgresql-15 (= ${binary:Version}),
- ${misc:Depends},
- ${shlibs:Depends},
-Provides:
- postgresql-pltcl,
-Description: PL/Tcl procedural language for PostgreSQL 15
- PL/Tcl enables an SQL developer to write procedural language functions
- for PostgreSQL 15 in Tcl.  You need this package if you have any
- PostgreSQL 15 functions that use the languages pltcl or pltclu.
- .
- PostgreSQL is an object-relational SQL database management system.
+# Package: postgresql-pltcl-15
+# Architecture: any
+# Depends:
+#  postgresql-15 (= ${binary:Version}),
+#  ${misc:Depends},
+#  ${shlibs:Depends},
+# Provides:
+#  postgresql-pltcl,
+# Description: PL/Tcl procedural language for PostgreSQL 15
+#  PL/Tcl enables an SQL developer to write procedural language functions
+#  for PostgreSQL 15 in Tcl.  You need this package if you have any
+#  PostgreSQL 15 functions that use the languages pltcl or pltclu.
+#  .
+#  PostgreSQL is an object-relational SQL database management system.
