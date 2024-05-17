@@ -1,3 +1,9 @@
+postgresql-15 (15.6-0+deb12u1+pexip24u5) pexip; urgency=medium
+
+  * Don't try to install JIT on dh_install.
+
+ -- Huw Jones <huw@pexip.com>  Fri, 17 May 2024 15:14:03 +0100
+
 postgresql-15 (15.6-0+deb12u1+pexip24u4) pexip; urgency=medium
 
   * Drop LLVM JIT support.
