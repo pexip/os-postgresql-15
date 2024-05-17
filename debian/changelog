@@ -1,3 +1,15 @@
+postgresql-15 (15.6-0+deb12u1+pexip24u4) pexip; urgency=medium
+
+  * Drop LLVM JIT support.
+
+ -- Huw Jones <huw@pexip.com>  Fri, 17 May 2024 13:49:53 +0100
+
+postgresql-15 (15.6-0+deb12u1+pexip24u3) pexip; urgency=medium
+
+  * Rebuild without failing to delete non-existent files
+
+ -- Huw Jones <huw@pexip.com>  Thu, 16 May 2024 17:09:23 +0100
+
 postgresql-15 (15.6-0+deb12u1+pexip24u2) pexip; urgency=medium
 
   * Rebuild without PL, GSSAPI & LDAP support
