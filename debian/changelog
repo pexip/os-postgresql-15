@@ -1,3 +1,27 @@
+postgresql-15 (15.8-0+deb12u1) bookworm-security; urgency=medium
+
+  * New upstream version.
+
+    + Prevent unauthorized code execution during pg_dump (Masahiko Sawada)
+
+      An attacker able to create and drop non-temporary objects could inject
+      SQL code that would be executed by a concurrent pg_dump session with the
+      privileges of the role running pg_dump (which is often a superuser).
+      The attack involves replacing a sequence or similar object with a view
+      or foreign table that will execute malicious code.  To prevent this,
+      introduce a new server parameter restrict_nonsystem_relation_kind that
+      can disable expansion of non-builtin views as well as access to foreign
+      tables, and teach pg_dump to set it when available.  Note that the
+      attack is prevented only if both pg_dump and the server it is dumping
+      from are new enough to have this fix.
+
+      The PostgreSQL Project thanks Noah Misch for reporting this problem.
+      (CVE-2024-7348)
+
+    * Refresh debian/patches/focal-arm64-outline-atomics.
+
+ -- Christoph Berg <myon@debian.org>  Wed, 07 Aug 2024 15:24:37 +0200
+
 postgresql-15 (15.7-0+deb12u1) bookworm; urgency=medium
 
   * New upstream version.
