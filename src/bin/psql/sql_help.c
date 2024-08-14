@@ -3296,7 +3296,7 @@ sql_help_DELETE(PQExpBuffer buf)
 					  "DELETE FROM [ ONLY ] %s [ * ] [ [ AS ] %s ]\n"
 					  "    [ USING %s [, ...] ]\n"
 					  "    [ WHERE %s | WHERE CURRENT OF %s ]\n"
-					  "    [ RETURNING * | %s [ [ AS ] %s ] [, ...] ]",
+					  "    [ RETURNING { * | %s [ [ AS ] %s ] } [, ...] ]",
 					  _("with_query"),
 					  _("table_name"),
 					  _("alias"),
@@ -3966,7 +3966,7 @@ sql_help_INSERT(PQExpBuffer buf)
 					  "    [ OVERRIDING { SYSTEM | USER } VALUE ]\n"
 					  "    { DEFAULT VALUES | VALUES ( { %s | DEFAULT } [, ...] ) [, ...] | %s }\n"
 					  "    [ ON CONFLICT [ %s ] %s ]\n"
-					  "    [ RETURNING * | %s [ [ AS ] %s ] [, ...] ]\n"
+					  "    [ RETURNING { * | %s [ [ AS ] %s ] } [, ...] ]\n"
 					  "\n"
 					  "%s\n"
 					  "\n"
@@ -4510,7 +4510,7 @@ sql_help_SELECT(PQExpBuffer buf)
 	appendPQExpBuffer(buf,
 					  "[ WITH [ RECURSIVE ] %s [, ...] ]\n"
 					  "SELECT [ ALL | DISTINCT [ ON ( %s [, ...] ) ] ]\n"
-					  "    [ * | %s [ [ AS ] %s ] [, ...] ]\n"
+					  "    [ { * | %s [ [ AS ] %s ] } [, ...] ]\n"
 					  "    [ FROM %s [, ...] ]\n"
 					  "    [ WHERE %s ]\n"
 					  "    [ GROUP BY [ ALL | DISTINCT ] %s [, ...] ]\n"
@@ -4644,7 +4644,7 @@ sql_help_SELECT_INTO(PQExpBuffer buf)
 	appendPQExpBuffer(buf,
 					  "[ WITH [ RECURSIVE ] %s [, ...] ]\n"
 					  "SELECT [ ALL | DISTINCT [ ON ( %s [, ...] ) ] ]\n"
-					  "    * | %s [ [ AS ] %s ] [, ...]\n"
+					  "    [ { * | %s [ [ AS ] %s ] } [, ...] ]\n"
 					  "    INTO [ TEMPORARY | TEMP | UNLOGGED ] [ TABLE ] %s\n"
 					  "    [ FROM %s [, ...] ]\n"
 					  "    [ WHERE %s ]\n"
@@ -4767,7 +4767,7 @@ sql_help_TABLE(PQExpBuffer buf)
 	appendPQExpBuffer(buf,
 					  "[ WITH [ RECURSIVE ] %s [, ...] ]\n"
 					  "SELECT [ ALL | DISTINCT [ ON ( %s [, ...] ) ] ]\n"
-					  "    [ * | %s [ [ AS ] %s ] [, ...] ]\n"
+					  "    [ { * | %s [ [ AS ] %s ] } [, ...] ]\n"
 					  "    [ FROM %s [, ...] ]\n"
 					  "    [ WHERE %s ]\n"
 					  "    [ GROUP BY [ ALL | DISTINCT ] %s [, ...] ]\n"
@@ -4924,7 +4924,7 @@ sql_help_UPDATE(PQExpBuffer buf)
 					  "        } [, ...]\n"
 					  "    [ FROM %s [, ...] ]\n"
 					  "    [ WHERE %s | WHERE CURRENT OF %s ]\n"
-					  "    [ RETURNING * | %s [ [ AS ] %s ] [, ...] ]",
+					  "    [ RETURNING { * | %s [ [ AS ] %s ] } [, ...] ]",
 					  _("with_query"),
 					  _("table_name"),
 					  _("alias"),
@@ -5005,7 +5005,7 @@ sql_help_WITH(PQExpBuffer buf)
 	appendPQExpBuffer(buf,
 					  "[ WITH [ RECURSIVE ] %s [, ...] ]\n"
 					  "SELECT [ ALL | DISTINCT [ ON ( %s [, ...] ) ] ]\n"
-					  "    [ * | %s [ [ AS ] %s ] [, ...] ]\n"
+					  "    [ { * | %s [ [ AS ] %s ] } [, ...] ]\n"
 					  "    [ FROM %s [, ...] ]\n"
 					  "    [ WHERE %s ]\n"
 					  "    [ GROUP BY [ ALL | DISTINCT ] %s [, ...] ]\n"
