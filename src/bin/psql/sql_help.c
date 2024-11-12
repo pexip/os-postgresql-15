@@ -236,7 +236,12 @@ sql_help_ALTER_DOMAIN(PQExpBuffer buf)
 					  "ALTER DOMAIN %s\n"
 					  "    RENAME TO %s\n"
 					  "ALTER DOMAIN %s\n"
-					  "    SET SCHEMA %s",
+					  "    SET SCHEMA %s\n"
+					  "\n"
+					  "%s\n"
+					  "\n"
+					  "[ CONSTRAINT %s ]\n"
+					  "{ NOT NULL | CHECK (%s) }",
 					  _("name"),
 					  _("expression"),
 					  _("name"),
@@ -254,7 +259,10 @@ sql_help_ALTER_DOMAIN(PQExpBuffer buf)
 					  _("name"),
 					  _("new_name"),
 					  _("name"),
-					  _("new_schema"));
+					  _("new_schema"),
+					  _("where domain_constraint is:"),
+					  _("constraint_name"),
+					  _("expression"));
 }
 
 static void
@@ -5175,7 +5183,7 @@ const struct _helpStruct QL_HELP[] = {
 		N_("change the definition of a domain"),
 		"sql-alterdomain",
 		sql_help_ALTER_DOMAIN,
-	17},
+	22},
 
 	{"ALTER EVENT TRIGGER",
 		N_("change the definition of an event trigger"),

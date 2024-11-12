@@ -4610,6 +4610,10 @@ mmerror(PARSE_ERROR, ET_WARNING, "unsupported feature will be passed to server")
  { 
  $$ = cat_str(3,mm_strdup("increment"),$2,$3);
 }
+|  LOGGED
+ { 
+ $$ = mm_strdup("logged");
+}
 |  MAXVALUE NumericOnly
  { 
  $$ = cat_str(2,mm_strdup("maxvalue"),$2);
@@ -4645,6 +4649,10 @@ mmerror(PARSE_ERROR, ET_WARNING, "unsupported feature will be passed to server")
 |  RESTART opt_with NumericOnly
  { 
  $$ = cat_str(3,mm_strdup("restart"),$2,$3);
+}
+|  UNLOGGED
+ { 
+ $$ = mm_strdup("unlogged");
 }
 ;
 

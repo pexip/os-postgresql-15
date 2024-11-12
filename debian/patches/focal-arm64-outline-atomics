@@ -10,9 +10,9 @@ This patch can be removed once focal is EOL.
 
 --- a/configure.ac
 +++ b/configure.ac
-@@ -546,6 +546,10 @@ if test "$GCC" = yes -a "$ICC" = no; the
+@@ -566,6 +566,10 @@ if test "$GCC" = yes -a "$ICC" = no; the
    if test -n "$NOT_THE_CFLAGS"; then
-     CFLAGS="$CFLAGS -Wno-stringop-truncation"
+     CFLAGS="$CFLAGS -Wno-cast-function-type-strict"
    fi
 +  if test x"$host_cpu" == x"aarch64"; then
 +    PGAC_PROG_CC_CFLAGS_OPT([-moutline-atomics])
