@@ -1,3 +1,9 @@
+postgresql-15 (15.10-0+deb12u1+pexip24u2) pexip; urgency=medium
+
+  * Bump version
+
+ -- John-Mark Bell <jmb@pexip.com>  Thu, 06 Mar 2025 11:39:37 +0000
+
 postgresql-15 (15.10-0+deb12u1+pexip24u1) pexip; urgency=medium
 
   * New upstream release
