@@ -2,12 +2,12 @@
 .\"     Title: pg_dump
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
-.\"      Date: 2024
-.\"    Manual: PostgreSQL 15.10 Documentation
-.\"    Source: PostgreSQL 15.10
+.\"      Date: 2025
+.\"    Manual: PostgreSQL 15.12 Documentation
+.\"    Source: PostgreSQL 15.12
 .\"  Language: English
 .\"
-.TH "PG_DUMP" "1" "2024" "PostgreSQL 15.10" "PostgreSQL 15.10 Documentation"
+.TH "PG_DUMP" "1" "2025" "PostgreSQL 15.12" "PostgreSQL 15.12 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -1080,6 +1080,14 @@ two_phase
 option will be automatically enabled by the subscriber if the subscription had been originally created with
 two_phase = true
 option\&.
+.PP
+It is generally recommended to use the
+\fB\-X\fR
+(\fB\-\-no\-psqlrc\fR) option when restoring a database from a plain\-text
+pg_dump
+script to ensure a clean restore process and prevent potential conflicts with non\-default
+psql
+configurations\&.
 .SH "EXAMPLES"
 .PP
 To dump a database called
@@ -1103,7 +1111,7 @@ newdb:
 .RS 4
 .\}
 .nf
-$ \fBpsql \-d newdb \-f db\&.sql\fR
+$ \fBpsql \-X \-d newdb \-f db\&.sql\fR
 .fi
 .if n \{\
 .RE
