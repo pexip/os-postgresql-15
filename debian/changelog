@@ -1,3 +1,16 @@
+postgresql-15 (15.13-0+deb12u1) bookworm; urgency=medium
+
+  * New upstream version 15.13.
+
+    + Avoid one-byte buffer overread when examining invalidly-encoded strings
+      that are claimed to be in GB18030 encoding (Noah Misch, Andres Freund)
+
+      While unlikely, a SIGSEGV crash could occur if an incomplete multibyte
+      character appeared at the end of memory.  This was possible both in the
+      server and in libpq-using applications. (CVE-2025-4207)
+
+ -- Christoph Berg <myon@debian.org>  Tue, 06 May 2025 17:55:19 +0200
+
 postgresql-15 (15.12-0+deb12u2) bookworm; urgency=medium
 
   * Grab base.tar.zst from failing 010_client_untar test on mipsel.

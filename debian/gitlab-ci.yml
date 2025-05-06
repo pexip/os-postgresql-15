@@ -2,3 +2,5 @@ include: https://salsa.debian.org/postgresql/postgresql-common/raw/master/gitlab
 
 variables:
   RELEASE: 'bookworm'
+  # does not understand our use of dpkg-divert
+  SALSA_CI_DISABLE_MISSING_BREAKS: 1
