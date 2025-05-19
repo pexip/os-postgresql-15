@@ -1,3 +1,22 @@
+postgresql-15 (15.13-0+deb12u1+pexip24u1) pexip; urgency=medium
+
+  * New upstream release
+
+ -- Steve McIntyre <steve.mcintyre@pexip.com>  Mon, 19 May 2025 12:40:48 +0100
+
+postgresql-15 (15.13-0+deb12u1) bookworm; urgency=medium
+
+  * New upstream version 15.13.
+
+    + Avoid one-byte buffer overread when examining invalidly-encoded strings
+      that are claimed to be in GB18030 encoding (Noah Misch, Andres Freund)
+
+      While unlikely, a SIGSEGV crash could occur if an incomplete multibyte
+      character appeared at the end of memory.  This was possible both in the
+      server and in libpq-using applications. (CVE-2025-4207)
+
+ -- Christoph Berg <myon@debian.org>  Tue, 06 May 2025 17:55:19 +0200
+
 postgresql-15 (15.12-0+deb12u2+pexip24u2) pexip; urgency=medium
 
   * No change rebuild
