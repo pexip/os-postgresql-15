@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
 .\"      Date: 2025
-.\"    Manual: PostgreSQL 15.13 Documentation
-.\"    Source: PostgreSQL 15.13
+.\"    Manual: PostgreSQL 15.14 Documentation
+.\"    Source: PostgreSQL 15.14
 .\"  Language: English
 .\"
-.TH "SECURITY LABEL" "7" "2025" "PostgreSQL 15.13" "PostgreSQL 15.13 Documentation"
+.TH "SECURITY LABEL" "7" "2025" "PostgreSQL 15.14" "PostgreSQL 15.14 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -90,6 +90,9 @@ The label provider determines whether a given label is valid and whether it is p
 PostgreSQL
 places no restrictions on whether or how a label provider must interpret security labels; it merely provides a mechanism for storing them\&. In practice, this facility is intended to allow integration with label\-based mandatory access control (MAC) systems such as
 SELinux\&. Such systems make all access control decisions based on object labels, rather than traditional discretionary access control (DAC) concepts such as users and groups\&.
+.PP
+You must own the database object to use
+\fBSECURITY LABEL\fR\&.
 .SH "PARAMETERS"
 .PP
 \fIobject_name\fR
