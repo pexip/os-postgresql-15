@@ -3,11 +3,11 @@
 .\"    Author: The PostgreSQL Global Development Group
 .\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
 .\"      Date: 2025
-.\"    Manual: PostgreSQL 15.13 Documentation
-.\"    Source: PostgreSQL 15.13
+.\"    Manual: PostgreSQL 15.14 Documentation
+.\"    Source: PostgreSQL 15.14
 .\"  Language: English
 .\"
-.TH "MERGE" "7" "2025" "PostgreSQL 15.13" "PostgreSQL 15.13 Documentation"
+.TH "MERGE" "7" "2025" "PostgreSQL 15.14" "PostgreSQL 15.14 Documentation"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -34,34 +34,34 @@ MERGE \- conditionally insert, update, or delete rows of a table
 .nf
 [ WITH \fIwith_query\fR [, \&.\&.\&.] ]
 MERGE INTO [ ONLY ] \fItarget_table_name\fR [ * ] [ [ AS ] \fItarget_alias\fR ]
-USING \fIdata_source\fR ON \fIjoin_condition\fR
-\fIwhen_clause\fR [\&.\&.\&.]
+    USING \fIdata_source\fR ON \fIjoin_condition\fR
+    \fIwhen_clause\fR [\&.\&.\&.]
 
 where \fIdata_source\fR is:
 
-{ [ ONLY ] \fIsource_table_name\fR [ * ] | ( \fIsource_query\fR ) } [ [ AS ] \fIsource_alias\fR ]
+    { [ ONLY ] \fIsource_table_name\fR [ * ] | ( \fIsource_query\fR ) } [ [ AS ] \fIsource_alias\fR ]
 
 and \fIwhen_clause\fR is:
 
-{ WHEN MATCHED [ AND \fIcondition\fR ] THEN { \fImerge_update\fR | \fImerge_delete\fR | DO NOTHING } |
-  WHEN NOT MATCHED [ AND \fIcondition\fR ] THEN { \fImerge_insert\fR | DO NOTHING } }
+    { WHEN MATCHED [ AND \fIcondition\fR ] THEN { \fImerge_update\fR | \fImerge_delete\fR | DO NOTHING } |
+      WHEN NOT MATCHED [ AND \fIcondition\fR ] THEN { \fImerge_insert\fR | DO NOTHING } }
 
 and \fImerge_insert\fR is:
 
-INSERT [( \fIcolumn_name\fR [, \&.\&.\&.] )]
-[ OVERRIDING { SYSTEM | USER } VALUE ]
-{ VALUES ( { \fIexpression\fR | DEFAULT } [, \&.\&.\&.] ) | DEFAULT VALUES }
+    INSERT [( \fIcolumn_name\fR [, \&.\&.\&.] )]
+        [ OVERRIDING { SYSTEM | USER } VALUE ]
+        { VALUES ( { \fIexpression\fR | DEFAULT } [, \&.\&.\&.] ) | DEFAULT VALUES }
 
 and \fImerge_update\fR is:
 
-UPDATE SET { \fIcolumn_name\fR = { \fIexpression\fR | DEFAULT } |
-             ( \fIcolumn_name\fR [, \&.\&.\&.] ) = [ ROW ] ( { \fIexpression\fR | DEFAULT } [, \&.\&.\&.] ) |
-             ( \fIcolumn_name\fR [, \&.\&.\&.] ) = ( \fIsub\-SELECT\fR )
-           } [, \&.\&.\&.]
+    UPDATE SET { \fIcolumn_name\fR = { \fIexpression\fR | DEFAULT } |
+                 ( \fIcolumn_name\fR [, \&.\&.\&.] ) = [ ROW ] ( { \fIexpression\fR | DEFAULT } [, \&.\&.\&.] ) |
+                 ( \fIcolumn_name\fR [, \&.\&.\&.] ) = ( \fIsub\-SELECT\fR )
+               } [, \&.\&.\&.]
 
 and \fImerge_delete\fR is:
 
-DELETE
+    DELETE
 .fi
 .SH "DESCRIPTION"
 .PP
