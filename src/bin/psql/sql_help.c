@@ -901,14 +901,23 @@ sql_help_ALTER_PUBLICATION(PQExpBuffer buf)
 					  "\n"
 					  "%s\n"
 					  "\n"
-					  "    TABLE [ ONLY ] %s [ * ] [ ( %s [, ... ] ) ] [ WHERE ( %s ) ] [, ... ]\n"
-					  "    TABLES IN SCHEMA { %s | CURRENT_SCHEMA } [, ... ]",
+					  "    TABLE %s [, ... ]\n"
+					  "    TABLES IN SCHEMA { %s | CURRENT_SCHEMA } [, ... ]\n"
+					  "\n"
+					  "%s\n"
+					  "\n"
+					  "    TABLE [ ONLY ] %s [ * ] [, ... ]\n"
+					  "    TABLES IN SCHEMA { %s | CURRENT_SCHEMA } [, ... ]\n"
+					  "\n"
+					  "%s\n"
+					  "\n"
+					  "    [ ONLY ] %s [ * ] [ ( %s [, ... ] ) ] [ WHERE ( %s ) ]",
 					  _("name"),
 					  _("publication_object"),
 					  _("name"),
 					  _("publication_object"),
 					  _("name"),
-					  _("publication_object"),
+					  _("publication_drop_object"),
 					  _("name"),
 					  _("publication_parameter"),
 					  _("value"),
@@ -917,10 +926,15 @@ sql_help_ALTER_PUBLICATION(PQExpBuffer buf)
 					  _("name"),
 					  _("new_name"),
 					  _("where publication_object is one of:"),
+					  _("table_and_columns"),
+					  _("schema_name"),
+					  _("and publication_drop_object is one of:"),
+					  _("table_name"),
+					  _("schema_name"),
+					  _("and table_and_columns is:"),
 					  _("table_name"),
 					  _("column_name"),
-					  _("expression"),
-					  _("schema_name"));
+					  _("expression"));
 }
 
 static void
@@ -2630,17 +2644,23 @@ sql_help_CREATE_PUBLICATION(PQExpBuffer buf)
 					  "\n"
 					  "%s\n"
 					  "\n"
-					  "    TABLE [ ONLY ] %s [ * ] [ ( %s [, ... ] ) ] [ WHERE ( %s ) ] [, ... ]\n"
-					  "    TABLES IN SCHEMA { %s | CURRENT_SCHEMA } [, ... ]",
+					  "    TABLE %s [, ... ]\n"
+					  "    TABLES IN SCHEMA { %s | CURRENT_SCHEMA } [, ... ]\n"
+					  "\n"
+					  "%s\n"
+					  "\n"
+					  "    [ ONLY ] %s [ * ] [ ( %s [, ... ] ) ] [ WHERE ( %s ) ]",
 					  _("name"),
 					  _("publication_object"),
 					  _("publication_parameter"),
 					  _("value"),
 					  _("where publication_object is one of:"),
+					  _("table_and_columns"),
+					  _("schema_name"),
+					  _("and table_and_columns is:"),
 					  _("table_name"),
 					  _("column_name"),
-					  _("expression"),
-					  _("schema_name"));
+					  _("expression"));
 }
 
 static void
@@ -5279,7 +5299,7 @@ const struct _helpStruct QL_HELP[] = {
 		N_("change the definition of a publication"),
 		"sql-alterpublication",
 		sql_help_ALTER_PUBLICATION,
-	10},
+	19},
 
 	{"ALTER ROLE",
 		N_("change a database role"),
@@ -5591,7 +5611,7 @@ const struct _helpStruct QL_HELP[] = {
 		N_("define a new publication"),
 		"sql-createpublication",
 		sql_help_CREATE_PUBLICATION,
-	8},
+	12},
 
 	{"CREATE ROLE",
 		N_("define a new database role"),
